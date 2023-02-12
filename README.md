@@ -12,7 +12,7 @@ If we need to remove UserA's access, we need to remove him from the RoleX
 
 Obviously, the advantage is simplification of the definition of access, but as we scale out the groups and users, with hierarchies and nesting, it becomes complex very quickly.
 
-**Attribute-based access control (ABAC) introduces access rules based on various factors, eg. the requester identity, and the resource attributes, and even contextual elements like request origin (eg request-time, device, location etc)**
+**Attribute-based access control (ABAC) introduces access rules based on various factors, eg. the requester identity, and the resource attributes, and even contextual elements like request origin (eg request-time, device, location etc)**  
 eg. the ResourceX can be deleted only if the request originates from the resource creator,   
 also the ResourceX can be accessed only if the request originates from an Android device and so forth
 
@@ -27,7 +27,8 @@ Choose ABAC if you:
 * Are in a large organization, which is constantly growing. ABAC enables scalability.
 * Have a workforce that is geographically distributed. ABAC can help you add attributes based on location and time-zone.
 * Want as granular and flexible an access control policy as possible.
-* Want to future-proof your access control policy. The world is evolving, and RBAC is slowly becoming a dated approach. ABAC gives you more control and flexibility over your security controls.
+* Want to future-proof your access control policy. 
+**The world is evolving, and RBAC is slowly becoming a dated approach. ABAC gives you more control and flexibility over your security controls.**
 
 Choose RBAC if you:
 * Are in a small-to-medium sized organization.
@@ -37,7 +38,7 @@ Choose RBAC if you:
 
 # Fine-Grained Authorization
 
-Fine-Grained Authorization as implemented by AWS IAM, brings the best of both worlds, by making use of a policy language on all resources as well as services
+Fine-Grained Authorization as implemented by AWS IAM, brings the best of both worlds, by making use of a policy language on all resources, as well as, services
 
 The Policy Language used by AWS IAM, uses four objects
 1. The **principal** is the entity taking the action, which can either be a user or another service
@@ -174,3 +175,18 @@ Let's Consider some Examples below. I am choosing DynamoDB as the following exam
     ]
 }
 ```
+
+
+However, be prepared for the implementation to become complex as illustrated from AWS own documentation on Determining whether a request is allowed or denied within an account
+
+Assume that a principal sends a request to AWS to access a resource in the same account as the principal's entity. The AWS enforcement code decides whether the request should be allowed or denied. AWS evaluates all policies that are applicable to the request context. The following is a summary of the AWS evaluation logic for policies within a single account.
+
+* By default, all requests are implicitly denied with the exception of the AWS account root user, which has full access. 
+* An explicit allow in an identity-based or resource-based policy overrides this default.
+* If a permissions boundary, Organizations SCP, or session policy is present, it might override the allow with an implicit deny.
+* An explicit deny in any policy overrides any allows.
+
+The following flow chart provides details about how the decision is made. This flow chart does not cover the impact of resource-based policies and implicit denies in other types of policies.
+
+![img](imgs/PolicyEvaluationHorizontal111621.png)
+ 
