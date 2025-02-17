@@ -48,7 +48,7 @@ The Policy Language used by AWS IAM, uses four objects
 
 Using the policy language, we can enable UserA(the principal) to delete(the action) ResourceX (the resource) only when user is logged with MFA (the condition)
 
-Let's Consider some Examples below. I am choosing DynamoDB as the following examples showcase Find-Grained Authorization on Table as well as its Attributes
+Let's Consider some Examples below. I am choosing DynamoDB as the following examples showcase Fine-Grained Authorization on Table as well as its Attributes
 
 1. Allow read only Access to a DynamoDB table, and also, limiting access to items which have "BC" as their partition key value  
 ```text
